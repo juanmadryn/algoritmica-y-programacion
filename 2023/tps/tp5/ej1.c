@@ -5,15 +5,15 @@ int main() {
     FILE *file;
     char c;
 
-    // Abre el archivo en modo de lectura
-    file = fopen(__FILE__, "r"); // __FILE__ es una macro que contiene el nombre del archivo fuente actual
+    // Abre el archivo __FILE__ (el fuente actual) en modo de lectura
+    file = fopen(__FILE__, "r");
 
     if (file == NULL) {
         perror("Error al abrir el archivo");
         return -1;
     }
 
-    // Lee y muestra el contenido del archivo
+    // Muestra el contenido del archivo
     printf("Contenido del archivo:\n");
     while ((c = fgetc(file)) != EOF) {
         putchar(c);

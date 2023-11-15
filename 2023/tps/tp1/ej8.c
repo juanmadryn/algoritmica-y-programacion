@@ -14,7 +14,6 @@ int main(){
         for(int j = 1; j < base; j++){
             printf("j: %d, n: %d, base: %d\n", j, n ,base);
             resultado += n;
-
         }
         n = resultado;
     }
