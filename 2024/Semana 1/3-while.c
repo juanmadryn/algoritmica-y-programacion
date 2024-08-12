@@ -8,8 +8,7 @@ int main() {
     scanf("%d", &iteraciones); // Lee la cantidad de iteraciones del usuario
 
     while (i <= iteraciones) { // El bucle continúa mientras i sea menor o igual a iteraciones
-        printf("%d\n", i); // Imprime el valor de i
-        i++; // Incrementa el valor de i en 1
+        printf("%d\n", ++i); // Imprime el valor de i
     }
 
     return 0;

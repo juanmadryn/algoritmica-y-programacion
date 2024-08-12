@@ -8,12 +8,6 @@ void swap(int *a, int *b) {
     *b = temp;
 }
 
-// Función para pausar la ejecución y esperar la entrada del usuario
-void pause() {
-    printf("Presiona Enter para continuar...\n");
-    getchar();
-}
-
 // Función para imprimir un arreglo
 void printArray(int arr[], int size) {
     for (int i = 0; i < size; i++)
@@ -29,7 +23,6 @@ int partition(int arr[], int low, int high) {
 
     printf("Particionando con pivote %d (originalmente en posición %d):\n", pivot, pivotIndex);
     printArray(arr, high - low + 1);
-    pause();
 
     // Recorro todo el arreglo
     for (int j = low; j < high; j++) {
@@ -39,13 +32,11 @@ int partition(int arr[], int low, int high) {
             swap(&arr[i], &arr[j]);
             printf("Intercambiando %d y %d:\n", arr[i], arr[j]);
             printArray(arr, high - low + 1);
-            pause();
         }
     }
     swap(&arr[i + 1], &arr[high]); // Mover pivote a su posición final
     printf("Pivote %d colocado en posición %d:\n", pivot, i + 1);
     printArray(arr, high - low + 1);
-    pause();
     return i + 1;
 }
 
