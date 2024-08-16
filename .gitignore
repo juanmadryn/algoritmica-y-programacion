@@ -6,5 +6,7 @@
 .config
 .minttyrc
 *.exe
+*
+!*/
 !*.c
 !*.h
