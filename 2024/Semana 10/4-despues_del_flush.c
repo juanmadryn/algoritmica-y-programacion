@@ -25,7 +25,6 @@ int main() {
         // Esperar a que el usuario presione una tecla
         printf("Presiona cualquier tecla para continuar...\n");
         getchar();  // Captura el '\n' que deja scanf
-        getchar();  // Espera la entrada del usuario
     }
 
     // Cerrar el archivo
