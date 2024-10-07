@@ -11,7 +11,10 @@ int main() {
     for (int i = 0; i < 5; i++) {
         printf("Valor de arr[%d] = %d, Dirección = %p\n", i, *p, p);
         p++;
-    }
+    }    
+
+    printf("Cantidad de elementos en arr: %ld\n", &arr[4]-arr+1);
+
 
     return 0;
 }

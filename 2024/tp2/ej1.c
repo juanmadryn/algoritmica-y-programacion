@@ -33,5 +33,5 @@ int main()
     for (int i=0 ;i < SIZE; i++) {
         printf("%d ", arreglo[i]);
     }
-    return 0; 
+    return 0;
 }
