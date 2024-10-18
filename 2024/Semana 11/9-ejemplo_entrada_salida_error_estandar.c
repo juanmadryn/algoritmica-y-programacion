@@ -5,10 +5,10 @@ int main() {
     printf("Ingresa un número: ");
     
     if (scanf("%d", &numero) != 1) {
-        fprintf(stderr, "Error: entrada no válida.\n"); // Mensaje de error a stderr
-        return 1; // Código de error
+        fprintf(stderr, "Error: entrada no válida.\n");
+        return 1;
     }
 
-    printf("Has ingresado: %d\n", numero); // Mensaje a stdout
+    printf("Has ingresado: %d\n", numero);
     return 0;
 }
