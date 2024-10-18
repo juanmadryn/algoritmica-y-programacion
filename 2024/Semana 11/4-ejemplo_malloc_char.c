@@ -29,7 +29,7 @@ int main() {
     arreglo[0] = 'h';
     
     // Intento de modificar la cadena literal
-    puntero_literal[0] = 'h';
+    //puntero_literal[0] = 'h';
 
     // Modificar el contenido de la memoria asignada dinámicamente
     puntero_malloc[0] = 'h';

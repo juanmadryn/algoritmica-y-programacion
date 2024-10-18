@@ -163,7 +163,7 @@ int main()
 {
     Pasajero pasajeros[TOTAL_PASAJEROS] = {0};
     int opcion;
-    char nombreArchivo[50] = obtenerValorConfiguracion("archivo_datos");
+    char *nombreArchivo = obtenerValorConfiguracion("archivo_datos");
     importarDesdeArchivo(pasajeros, nombreArchivo);
 
     do
@@ -199,7 +199,7 @@ int main()
         default:
             printf("Opción inválida. Inténtalo nuevamente.\n");
         }
-    } while (opcion != 7);
+    } while (opcion != 5);
 
     return 0;
 }
