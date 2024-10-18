@@ -1,25 +1,34 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+struct Pasajero
+{
+    int fila;
+    char asiento;
+    float peso;
+};
+
 struct Nodo
 {
-    int dato;
+    struct Pasajero dato;
     struct Nodo *anterior;
     struct Nodo *siguiente;
 };
 
-struct Nodo *crearNodo(int valor)
+// Función para crear un nuevo nodo con un pasajero
+struct Nodo *crearNodo(struct Pasajero pasajero)
 {
     struct Nodo *nuevoNodo = (struct Nodo *)malloc(sizeof(struct Nodo));
-    nuevoNodo->dato = valor;
+    nuevoNodo->dato = pasajero;
     nuevoNodo->anterior = NULL;
     nuevoNodo->siguiente = NULL;
     return nuevoNodo;
 }
 
-void agregar(struct Nodo **cabeza, int valor)
+// Función para agregar un pasajero a la lista
+void agregar(struct Nodo **cabeza, struct Pasajero pasajero)
 {
-    struct Nodo *nuevoNodo = crearNodo(valor);
+    struct Nodo *nuevoNodo = crearNodo(pasajero);
 
     // La lista está vacía, el nuevo nodo es la cabeza
     if (*cabeza == NULL)
@@ -37,17 +46,18 @@ void agregar(struct Nodo **cabeza, int valor)
         temp->siguiente = nuevoNodo;
         nuevoNodo->anterior = temp;
     }
-    printf("Elemento %d agregado a la lista.\n", valor);
+    printf("Pasajero agregado: Fila %d, Asiento %c, Peso %.2f kg.\n", pasajero.fila, pasajero.asiento, pasajero.peso);
 }
 
-void eliminar(struct Nodo **cabeza, int valor)
+// Función para eliminar un pasajero
+void eliminar(struct Nodo **cabeza, int fila, char asiento)
 {
     struct Nodo *temp = *cabeza;
 
     if (*cabeza != NULL)
     {
         // Busco el nodo a eliminar
-        while (temp != NULL && temp->dato != valor)
+        while (temp != NULL && (temp->dato.fila != fila || temp->dato.asiento != asiento))
         {
             temp = temp->siguiente;
         }
@@ -71,11 +81,11 @@ void eliminar(struct Nodo **cabeza, int valor)
             }
 
             free(temp);
-            printf("Elemento %d eliminado de la lista.\n", valor);
+            printf("Pasajero eliminado: Fila %d, Asiento %c.\n", fila, asiento);
         }
         else
         {
-            printf("Elemento %d no encontrado en la lista.\n", valor);
+            printf("Pasajero no encontrado: Fila %d, Asiento %c.\n", fila, asiento);
         }
     }
     else
@@ -84,39 +94,41 @@ void eliminar(struct Nodo **cabeza, int valor)
     }
 }
 
-void modificar(struct Nodo *cabeza, int valorAntiguo, int valorNuevo)
+// Función para modificar un pasajero
+void modificar(struct Nodo *cabeza, int fila, char asiento, float nuevoPeso)
 {
     struct Nodo *temp = cabeza;
 
-    // Buscar el nodo con el valor a modificar
-    while (temp != NULL && temp->dato != valorAntiguo)
+    // Buscar el pasajero con la fila y asiento a modificar
+    while (temp != NULL && (temp->dato.fila != fila || temp->dato.asiento != asiento))
     {
         temp = temp->siguiente;
     }
-    
+
     if (temp != NULL)
     {
-        // Modificar el valor
-        temp->dato = valorNuevo;
-        printf("Elemento %d modificado a %d en la lista.\n", valorAntiguo, valorNuevo);
+        // Modificar el peso
+        temp->dato.peso = nuevoPeso;
+        printf("Pasajero modificado: Fila %d, Asiento %c, Nuevo peso %.2f kg.\n", fila, asiento, nuevoPeso);
     }
-    // Si el valor no está en la lista
+    // Si el pasajero no está en la lista
     else
     {
-        printf("Elemento %d no encontrado en la lista.\n", valorAntiguo);
+        printf("Pasajero no encontrado: Fila %d, Asiento %c.\n", fila, asiento);
     }
 }
 
+// Función para imprimir la lista hacia adelante
 void imprimirListaAdelante(struct Nodo *cabeza)
 {
     struct Nodo *temp = cabeza;
 
     if (cabeza != NULL)
     {
-        printf("Elementos de la lista (adelante): ");
+        printf("Lista de pasajeros (adelante):\n");
         while (temp != NULL)
         {
-            printf("%d -> ", temp->dato);
+            printf("Fila %d, Asiento %c, Peso %.2f kg -> ", temp->dato.fila, temp->dato.asiento, temp->dato.peso);
             temp = temp->siguiente;
         }
         printf("NULL\n");
@@ -127,6 +139,7 @@ void imprimirListaAdelante(struct Nodo *cabeza)
     }
 }
 
+// Función para imprimir la lista hacia atrás
 void imprimirListaAtras(struct Nodo *cabeza)
 {
     struct Nodo *temp = cabeza;
@@ -140,10 +153,10 @@ void imprimirListaAtras(struct Nodo *cabeza)
         }
 
         // Imprimir hacia atrás
-        printf("Elementos de la lista (atrás): ");
+        printf("Lista de pasajeros (atrás):\n");
         while (temp != NULL)
         {
-            printf("%d -> ", temp->dato);
+            printf("Fila %d, Asiento %c, Peso %.2f kg -> ", temp->dato.fila, temp->dato.asiento, temp->dato.peso);
             temp = temp->anterior;
         }
         printf("NULL\n");
@@ -159,21 +172,23 @@ int main()
 {
     struct Nodo *lista = NULL;
 
-    agregar(&lista, 10);
-    agregar(&lista, 20);
-    agregar(&lista, 30);
+    struct Pasajero p1 = {1, 'A', 70.5};
+    struct Pasajero p2 = {2, 'B', 65.0};
+    struct Pasajero p3 = {3, 'C', 80.0};
+
+    agregar(&lista, p1);
+    agregar(&lista, p2);
+    agregar(&lista, p3);
+    
     imprimirListaAdelante(lista);
     imprimirListaAtras(lista);
 
-    modificar(lista, 20, 25);
+    modificar(lista, 2, 'B', 68.0);
     imprimirListaAdelante(lista);
 
-    eliminar(&lista, 10);
+    eliminar(&lista, 1, 'A');
     imprimirListaAdelante(lista);
     imprimirListaAtras(lista);
-
-    eliminar(&lista, 40);
-    imprimirListaAdelante(lista);
 
     return 0;
 }
