@@ -1,0 +1,1 @@
+char* obtenerValorConfiguracion(const char* clave);
