@@ -36,10 +36,6 @@ int main() {
     // Después de reducir el tamaño, el contenido de la cadena es impredecible
     printf("Cadena después de reducir el tamaño: %s\n", cadena);
 
-    strcpy(cadena, "Chau!");
-
-    printf("Cadena después de cambiar el contenido: %s\n", cadena);
-
     // Liberar la memoria asignada
     free(cadena);
 
