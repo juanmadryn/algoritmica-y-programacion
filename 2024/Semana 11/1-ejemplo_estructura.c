@@ -1,9 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define FILAS 17
 #define ASIENTOS 6
 #define TOTAL_PASAJEROS (FILAS * ASIENTOS)
+
+#define MAX_LINEA 256
 
 typedef struct
 {
@@ -11,6 +14,35 @@ typedef struct
     char asiento;
     float peso;
 } Pasajero;
+
+char* obtenerValorConfiguracion(const char* clave) {
+    FILE *archivo = fopen(".env", "r");
+    if (archivo == NULL) {
+        perror("Error al abrir el archivo .env");
+        return NULL;
+    }
+
+    char linea[MAX_LINEA];
+    char *valor = NULL;
+
+    while (fgets(linea, sizeof(linea), archivo) && valor == NULL) {
+        // Verifica si la línea contiene la clave buscada
+        if (strncmp(linea, clave, strlen(clave)) == 0) {
+            // Busca el caracter '=' en la línea
+            char *igual = strchr(linea, '=');
+            if (igual != NULL) {
+                // El valor está después del símbolo '='
+                valor = strdup(igual + 1);
+                
+                // Eliminar salto de línea si lo hay
+                valor[strcspn(valor, "\n")] = '\0';
+            }
+        }
+    }
+
+    fclose(archivo);
+    return valor;
+}
 
 int calcularIndice(int fila, char asiento)
 {
@@ -158,7 +190,8 @@ int main()
 {
     Pasajero pasajeros[TOTAL_PASAJEROS] = {0};
     int opcion;
-    char nombreArchivo[50];
+    char nombreArchivo[50] = obtenerValorConfiguracion("archivo_datos");
+    importarDesdeArchivo(pasajeros, nombreArchivo);
 
     do
     {
@@ -167,9 +200,7 @@ int main()
         printf("2. Borrar un peso\n");
         printf("3. Mostrar el peso de una fila\n");
         printf("4. Mostrar el peso total de los pasajeros del avión\n");
-        printf("5. Guardar datos en archivo\n");
-        printf("6. Importar datos desde archivo\n");
-        printf("7. Terminar el programa\n");
+        printf("5. Terminar el programa\n");
         printf("Selecciona una opción: ");
         scanf("%d", &opcion);
 
@@ -177,9 +208,11 @@ int main()
         {
         case 1:
             ingresarPeso(pasajeros);
+            guardarEnArchivo(pasajeros, nombreArchivo);
             break;
         case 2:
             borrarPeso(pasajeros);
+            guardarEnArchivo(pasajeros, nombreArchivo);
             break;
         case 3:
             mostrarPesoFila(pasajeros);
@@ -188,16 +221,6 @@ int main()
             mostrarPesoTotal(pasajeros);
             break;
         case 5:
-            printf("Ingresa el nombre del archivo para guardar: ");
-            scanf("%s", nombreArchivo);
-            guardarEnArchivo(pasajeros, nombreArchivo);
-            break;
-        case 6:
-            printf("Ingresa el nombre del archivo para importar: ");
-            scanf("%s", nombreArchivo);
-            importarDesdeArchivo(pasajeros, nombreArchivo);
-            break;
-        case 7:
             printf("Terminando el programa.\n");
             break;
         default:
