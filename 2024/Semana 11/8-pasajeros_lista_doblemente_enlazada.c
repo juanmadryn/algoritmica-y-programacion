@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "archivo_configuracion.h"
 
 struct Pasajero
 {

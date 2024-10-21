@@ -27,8 +27,6 @@ int main() {
         getchar();  // Captura el '\n' que deja scanf
     }
 
-    // Cerrar el archivo
-    fclose(archivo);
     printf("Números guardados en el archivo.\n");
 
     return 0;

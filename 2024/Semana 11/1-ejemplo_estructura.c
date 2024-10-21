@@ -16,7 +16,6 @@ typedef struct
 } Pasajero;
 
 
-
 int calcularIndice(int fila, char asiento)
 {
     return (fila - 1) * ASIENTOS + (asiento - 'A');
