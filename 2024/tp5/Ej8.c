@@ -34,7 +34,7 @@ void imprimirArreglo(int arreglo[], int tamaño) {
 
 int main() {
     int tamaño;
-    printf("Ingrese el tamaño del arreglo: ");
+    printf("Ingrese el tamanio del arreglo: ");
     scanf("%d", &tamaño);
     
     int arreglo[tamaño];
