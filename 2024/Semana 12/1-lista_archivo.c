@@ -204,7 +204,7 @@ void ingresarPeso(Nodo **cabeza)
     agregar(cabeza, pasajero);
 }
 
-void borrarPeso(Pasajero pasajeros[TOTAL_PASAJEROS])
+void borrarPeso(Nodo **cabeza)
 {
     int fila;
     char asiento;
@@ -231,7 +231,7 @@ void borrarPeso(Pasajero pasajeros[TOTAL_PASAJEROS])
     printf("Peso borrado correctamente.\n");
 }
 
-void mostrarPesoFila(Pasajero pasajeros[TOTAL_PASAJEROS])
+void mostrarPesoFila(Nodo **cabeza)
 {
     int fila;
     float pesoTotal = 0.0;
@@ -253,7 +253,7 @@ void mostrarPesoFila(Pasajero pasajeros[TOTAL_PASAJEROS])
     printf("El peso total de la fila %d es: %.2f kg\n", fila, pesoTotal);
 }
 
-void mostrarPesoTotal(Pasajero pasajeros[TOTAL_PASAJEROS])
+void mostrarPesoTotal(Nodo **cabeza)
 {
     float pesoTotal = 0.0;
 

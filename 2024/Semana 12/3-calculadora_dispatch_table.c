@@ -12,10 +12,10 @@ int multiplicar(int a, int b) {
     return a * b;
 }
 
-// Dispatch table (arreglo de punteros a función)
-int (*operaciones[])(int, int) = {sumar, restar, multiplicar};
-
 int main() {
+    // Dispatch table (arreglo de punteros a función)
+    int (*operaciones[])(int, int) = {sumar, restar, multiplicar};
+    
     int x = 10, y = 5;
     int opcion;
 
